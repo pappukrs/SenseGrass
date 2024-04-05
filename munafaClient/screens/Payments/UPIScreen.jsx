@@ -1,4 +1,4 @@
-// UPIScreen.js
+
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 
@@ -6,7 +6,7 @@ const UPIScreen = () => {
   const [upiId, setUpiId] = useState('');
 
   const handleSave = () => {
-    // Logic to save UPI ID
+   
   };
 
   return (

@@ -13,7 +13,7 @@ const PaymentsScreen = () => {
     setModalVisible(false);
   };
 
-  // Render the selected payment method screen
+ 
   const renderPaymentMethodScreen = () => {
     switch (selectedPaymentMethod) {
       case 'Debit Card':
@@ -29,38 +29,42 @@ const PaymentsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Payments Screen</Text>
-      <Button title="Select Payment Method" onPress={() => setModalVisible(true)} />
-      {/* Inside the Modal component */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <TouchableOpacity style={styles.modalContainer} onPress={() => setModalVisible(false)}>
-          <View style={styles.modalContent}>
-            <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeButton}>
-              <Text style={styles.closeButtonText}>x</Text>
+      
+      {selectedPaymentMethod ? (
+        renderPaymentMethodScreen()
+      ) : (
+        <>
+          <Button title="Select Payment Method" onPress={() => setModalVisible(true)} />
+          
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <TouchableOpacity style={styles.modalContainer} onPress={() => setModalVisible(false)}>
+              <View style={styles.modalContent}>
+                <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeButton}>
+                  <Text style={styles.closeButtonText}>x</Text>
+                </TouchableOpacity>
+                <Text style={styles.modalTitle}>Select Payment Method</Text>
+                <TouchableOpacity style={styles.radioButton} onPress={() => handlePaymentMethodSelection('Debit Card')}>
+                  <Text>Debit Card</Text>
+                  {selectedPaymentMethod === 'Debit Card' && <Text>✔️</Text>}
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.radioButton} onPress={() => handlePaymentMethodSelection('Credit Card')}>
+                  <Text>Credit Card</Text>
+                  {selectedPaymentMethod === 'Credit Card' && <Text>✔️</Text>}
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.radioButton} onPress={() => handlePaymentMethodSelection('UPI')}>
+                  <Text>UPI</Text>
+                  {selectedPaymentMethod === 'UPI' && <Text>✔️</Text>}
+                </TouchableOpacity>
+              </View>
             </TouchableOpacity>
-            <Text style={styles.modalTitle}>Select Payment Method</Text>
-            <TouchableOpacity style={styles.radioButton} onPress={() => handlePaymentMethodSelection('Debit Card')}>
-              <Text>Debit Card</Text>
-              {selectedPaymentMethod === 'Debit Card' && <Text>✔️</Text>}
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.radioButton} onPress={() => handlePaymentMethodSelection('Credit Card')}>
-              <Text>Credit Card</Text>
-              {selectedPaymentMethod === 'Credit Card' && <Text>✔️</Text>}
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.radioButton} onPress={() => handlePaymentMethodSelection('UPI')}>
-              <Text>UPI</Text>
-              {selectedPaymentMethod === 'UPI' && <Text>✔️</Text>}
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
-      </Modal>
-
-      {modalVisible && renderPaymentMethodScreen()}
+          </Modal>
+        </>
+      )}
     </View>
   );
 };
