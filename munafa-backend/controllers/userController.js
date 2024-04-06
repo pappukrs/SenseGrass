@@ -12,6 +12,16 @@ const userList = async(re,res)=>{
     }
 }
 
+const getSingleUser = async(req,res)=>{
+    const userid = req.params.useId;
+    try {
+        const user = User.findById(userid).populate(' payments')
+        
+    } catch (error) {
+        
+    }
+}
+
 const createUser = async(req,res)=>{
     const newUser =new User( {
         username:req.body.username,
@@ -24,6 +34,8 @@ const createUser = async(req,res)=>{
     console.log("newUser",newUser)
 
     try {
+
+        
         const savedUser = await newUser.save()
         console.log("savedUser",savedUser)
         res.status(200).json(savedUser);
@@ -37,5 +49,6 @@ const createUser = async(req,res)=>{
 
 module.exports={
     userList,
-    createUser
+    createUser,
+    getSingleUser
 }
