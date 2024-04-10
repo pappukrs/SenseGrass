@@ -6,7 +6,7 @@ const SuccessfulPayment = () => {
   return (
     <View style={styles.container}>
       <Text style={[styles.text, { color: 'green' }]}>PAYMENT SUCCESSFUL</Text>
-      <CorrectSign name ="checkcircleo" size = {70} />
+      <CorrectSign name ="checkcircleo" size = {70} style={styles.checkcircleo} />
     </View>
   );
 };
@@ -15,7 +15,7 @@ const PaymentFailed = () => {
   return (
     <View style={styles.container}>
       <Text style={[styles.text, { color: 'red' }]}>PAYMENT FAILED</Text>
-      <CrsossSign name = "closecircle" size={70} />
+      <CrsossSign name = "closecircleo" size={70} style={styles.closeCircle} />
     </View>
   );
 };
@@ -32,11 +32,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
-  image: {
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
+  checkcircleo:{
+   backgroundColor:"green",
+   color:"white"
   },
+  closeCircle:{
+    backgroundColor:"red",
+    color:"white"
+  }
+
 });
 
 export { SuccessfulPayment, PaymentFailed };

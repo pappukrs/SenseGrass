@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { storeData } from './Storage';
+
 
 
 
@@ -60,6 +62,13 @@ const BankTransfer = () => {
       });
 
       const data = await response.json();
+      console.log("data:-",data)
+      
+      storeData("_id",data._id)
+      // const saveData ={
+      //   name:fullName
+      // }
+      storeData("name",fullName)
 
       // Check if data saved successfully
       if (response.ok) {

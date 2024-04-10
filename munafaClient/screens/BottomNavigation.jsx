@@ -9,6 +9,7 @@ import ProfileScreen from './Profile/ProfileScreen';
 import PaymentsScreen from './Payments/PaymentsScreen';
 import BankTransfer from './BankTransfer';
 import StripePaymentForm from './StripePaymentForm';
+import { PaymentFailed, SuccessfulPayment } from './PaymentStatusPage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -29,6 +30,16 @@ const HomeStack = () => (
     <Stack.Screen
       name="stripeCardForm"
       component={StripePaymentForm}
+      options={{ headerShown: false }}
+    />
+     <Stack.Screen
+      name="paymentSuccess"
+      component={SuccessfulPayment}
+      options={{ headerShown: false }}
+    />
+     <Stack.Screen
+      name="paymentFailed"
+      component={PaymentFailed}
       options={{ headerShown: false }}
     />
     {/* Other screens in the Home stack */}

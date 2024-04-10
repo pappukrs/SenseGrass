@@ -4,9 +4,9 @@ const PORT = process.env.PORT || 3000;
 const db = require('./database/db')
 const cors = require('cors');
 
-console.log("db::--",db)
+// console.log("db::--",db)
 const userRoute = require('./routes/authRoutes')
-console.log("userRoute",userRoute)
+// console.log("userRoute",userRoute)
 app.use(cors())
 app.use(express.json());
 

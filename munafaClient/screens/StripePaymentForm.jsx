@@ -1,12 +1,11 @@
 import React from 'react';
 import {View, Button, Platform} from 'react-native';
 import {CardField, useConfirmPayment} from '@stripe/stripe-react-native';
+import { useNavigation } from '@react-navigation/native';
 
 function StripePaymentForm() {
-
-
+    const navigation = useNavigation()
   const fetchPaymentIntentClientSecret = async () => {
-
     console.log("fetchPaymentIntentClientSecret ")
     const apiEndpoint ="http://192.168.29.190:3000"
       //Platform.OS === 'android' ? 'http://192.168.29.190:3000' : 'http://10.0.2.2:4567';
@@ -36,10 +35,10 @@ function StripePaymentForm() {
       "address": {
         "city": "pune",
         "country": "US",
-        "line1": "kkdk",
-        "line2": "kdjkdjk",
+        "line1": "LIN1",
+        "line2": "line2",
         "postal_code": "12980",
-        "state": "uk"
+        "state": "BR"
       },
     };
 
@@ -57,48 +56,10 @@ function StripePaymentForm() {
 
     if (error) {
       console.log('Payment confirmation error', error);
-
-      const response = await fetch('http://192.168.29.190:3000/update-money-transfer-details', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            _id:"828737",
-        //   fullName,
-        //   bankName,
-        //   ifscCode,
-        //   accountNumber,
-        //   nickname,
-        //   amount, // Include amount in the data
-          paymentFailure:true,
-          paymentSuccess:false,
-          userId:"66101450c4ed32ce80f47b0d"
-        }),
-      });
-
-
+      navigation.navigate('paymentFailed')
     } else if (paymentIntent) {
       console.log('Success from promise', paymentIntent);
-
-      const response = await fetch('http://192.168.29.190:3000/update-money-transfer-details', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            _id:"828737",
-        //   fullName,
-        //   bankName,
-        //   ifscCode,
-        //   accountNumber,
-        //   nickname,
-        //   amount, // Include amount in the data
-          paymentFailure:false,
-          paymentSuccess:true,
-          userId:"66101450c4ed32ce80f47b0d"
-        }),
-      });
+      navigation.navigate('paymentSuccess')
     }
   };
 

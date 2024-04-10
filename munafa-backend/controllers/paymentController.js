@@ -14,7 +14,7 @@ const stripe = require('stripe')(STRIPE_SECRET_KEY)
 const createPayment = async (req, res) => {
     const { senderName, receiverName, cardDetails, paymentFailure, paymentSuccess, userId, senderBank } = req.body;
     //const userId = req.params.userId; // Access userId from route parameters
-    console.log("userId", userId)
+    // console.log("userId", userId)
     // if (!ObjectId.isValid(userId)) {
     //     return res.status(400).json({ message: 'Invalid userId' });
     // }
@@ -160,6 +160,7 @@ const createCharges = async (req, res) => {
 
 
 const createMoneyTransfer = async (req, res) => {
+    console.log("createMoneyTransfer get called")
 
 
     try {
@@ -191,7 +192,7 @@ const createMoneyTransfer = async (req, res) => {
     
           const savedMoneyTransferDetails =   await moneyTranferDetails.save()
 
-          res.status(201).send(moneyTranferDetails )
+          res.status(201).send(savedMoneyTransferDetails )
         
     } catch (error) {
         res.status(500).send({msg:error.message})
@@ -206,18 +207,8 @@ const createMoneyTransfer = async (req, res) => {
 const updateMoneyTransfer = async (req, res) => {
     console.log("updateMoneyTransfer got called")
     try {
-        const {
-            _id,
-            // fullName,
-            // bankName,
-            // ifscCode,
-            // accountNumber,
-            // nickname,
-            // amount,
-            paymentFailure,
-            paymentSuccess,
-            userId
-        } = req.body;
+
+        const { _id,paymentFailure,paymentSuccess,userId} = req.body;
 
         // Assuming paymentTransfer is your Mongoose model
         // First, find the document to update
@@ -228,12 +219,6 @@ const updateMoneyTransfer = async (req, res) => {
             return res.status(404).send({ msg: "Money transfer details not found" });
         }
 
-        // Update the fields
-        // existingMoneyTransfer.name = fullName;
-        // existingMoneyTransfer.bank = bankName;
-        // existingMoneyTransfer.ifsc = ifscCode;
-        // existingMoneyTransfer.account = accountNumber;
-        // existingMoneyTransfer.amount = amount;
         existingMoneyTransfer.paymentFailure = paymentFailure;
         existingMoneyTransfer.paymentSuccess = paymentSuccess;
 
@@ -253,13 +238,10 @@ const getSuceessfulMoneyTransfer = async (req, res) => {
     
     try {
 
-        const moneyTransferDetails = await PaymentTransfer.find({ $and: [
-            { paymentFailure: false },
-            { paymentSuccess: true }
-          ]
-        });
+        const moneyTransferDetails = await PaymentTransfer.find({ $and: [{ paymentFailure: false }, { paymentSuccess: true }] }).sort({ createdAt: -1 }).limit(3) 
 
-          res.status(201).send(moneyTranferDetails )
+
+          res.status(201).send(moneyTransferDetails )
         
     } catch (error) {
         res.status(500).send({msg:error.message})
@@ -271,17 +253,14 @@ const getSuceessfulMoneyTransfer = async (req, res) => {
 
 const getPendingMoneyTransfer = async (req, res) => {
 
-    const paymentStatus = req.params.paymentStatus;
+    let  { paymentFailure,paymentSuccess} = req.body
     
     try {
 
-        const moneyTransferDetails = await PaymentTransfer.find({ $and: [
-              { paymentFailure: true },
-              { paymentSuccess: false }
-            ]
-          });
+        const moneyTransferDetails = await PaymentTransfer.find({ $and: [{ paymentFailure: true }, { paymentSuccess: false }] }).sort({ createdAt: -1 }).limit(3)
+        // Sort by createdAt field in descending order.limit(3); // Limit the result to 3 documents
 
-          res.status(201).send(moneyTranferDetails )
+          res.status(201).send(moneyTransferDetails )
         
     } catch (error) {
         res.status(500).send({msg:error.message})
@@ -297,22 +276,25 @@ const getPendingMoneyTransfer = async (req, res) => {
 
 
 
-const calculateOrderAmount = items => {
-    // Replace this constant with a calculation of the order's amount
-    // Calculate the order total on the server to prevent
-    // people from directly manipulating the amount on the client
-    return (1400) * 100;
-};
 
 const paymentInent = async (req, res) => {
     console.log("paymentIntent got called")
-    const { items } = req.body;
+    const { _id } = req.body;
+
     // Create a PaymentIntent with the order amount and currency
+    // let response =0;
+    // if(_id!==null){
+    //     response = await PaymentTransfer.findOne({_id})
+    // }
+    
+    // console.log("response",response.amount)
+    // console.log("_id",_id)
+    
     const paymentIntent = await stripe.paymentIntents.create({
-        amount: calculateOrderAmount(items),
+        amount: 123400 ,
         currency: "INR",
         payment_method_types: ['card'],
-        description: 'Your payment description goes here',
+        description: 'Description for payment',
 
     });
 

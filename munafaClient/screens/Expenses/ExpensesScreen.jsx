@@ -4,7 +4,13 @@ import BankTransfer from '../BankTransfer'
 
 const ExpensesScreen = () => {
   return (
-    <BankTransfer/>
+    <View>
+      <Text>
+        Expenses Screen
+      </Text>
+    </View>
+
+    // <BankTransfer/>
   )
 }
 

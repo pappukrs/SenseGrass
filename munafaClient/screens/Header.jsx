@@ -5,10 +5,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const Header = () => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+      <TouchableOpacity >
         <Ionicons name="menu" size={30} color="black" style={styles.icon} />
       </TouchableOpacity>
-      
+
       <View style={styles.rightIcons}>
         <TouchableOpacity onPress={() => {/* Handle notification button press */}}>
           <Ionicons name="notifications" size={30} color="black" style={styles.icon} />
@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#fff', // Background color of the header
+    backgroundColor: '#fff', 
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc', // Border color of the header
+    borderBottomColor: '#ccc', 
   },
   rightIcons: {
     flexDirection: 'row',
