@@ -12,5 +12,21 @@ Router.post('/users/:userId/payment', PaymentController.getPaymentsForUser); // 
 Router.put('/payments/:paymentId', PaymentController.updatePayment); // Update a payment
 Router.delete('/payments/:paymentId', PaymentController.deletePayment); // Delete a payment
 
+//
+
+Router.post('/create-customer',PaymentController.createCustomer)
+Router.post('/add-card',PaymentController.addNewCard);
+Router.post('/create-charges',PaymentController.createCharges)
+
+//
+Router.post('/save-money-transfer-details',PaymentController.createMoneyTransfer)
+
+ Router.put('/update-money-tranfer-details',PaymentController.updateMoneyTransfer )
+ Router.post('/success-money-tranfer-details',PaymentController.getSuceessfulMoneyTransfer)
+ Router.post('/pending-money-tranfer-details',PaymentController.getPendingMoneyTransfer)
+
+
+ Router.post('/create-payment-intent',PaymentController.paymentInent)
+
 
 module.exports = Router;

@@ -8,6 +8,7 @@ const Header = () => {
       <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
         <Ionicons name="menu" size={30} color="black" style={styles.icon} />
       </TouchableOpacity>
+      
       <View style={styles.rightIcons}>
         <TouchableOpacity onPress={() => {/* Handle notification button press */}}>
           <Ionicons name="notifications" size={30} color="black" style={styles.icon} />

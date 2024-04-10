@@ -14,7 +14,7 @@ const Card = ({ walletBalance, upiID, onPressAddMoney }) => {
       <View style={styles.card}>
         <View style={styles.walletBalanceContainer}>
           <Text style={styles.walletBalanceLabel}>Wallet Balance</Text>
-          <Text style={styles.walletBalanceAmount}>$ {walletBalance}</Text>
+          <Text style={styles.walletBalanceAmount}>₹ {walletBalance}</Text>
         </View>
         <View style={styles.upiIDContainer}>
           <Text style={styles.upiIDText}>UPI ID: {upiID}</Text>
