@@ -1,8 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import CrsossSign from 'react-native-vector-icons/AntDesign'
 import CorrectSign from 'react-native-vector-icons/AntDesign'
-const SuccessfulPayment = () => {
+import { payLoanMethod } from '../Redux/Actions/LoanAction'
+import { useDispatch, useSelector } from 'react-redux';
+const SuccessfulPayment = ({route,navigation}) => {
+  var {amount,url} = route.params;
+  const dispatch =useDispatch()
+
+
+  var loanPay = async (amount, url) => {
+    console.log("inside loan pay____",amount,loanId)
+    try {
+      const response = await fetch(`${url}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ amount }),
+      });
+
+      console.log("response____",response)
+      if (!response.ok) {
+        throw new Error('Failed to pay loan');
+      }
+      const data = await response.json();
+      console.log("d__a__t_-a",data)
+      dispatch(payLoanMethod(data));
+    } catch (error) {
+      console.error('Error paying loan:', error.message);
+    }
+  };
+
+
+  useEffect(()=>{
+    loanPay(amount,url)
+  },[])
+
+  
+  console.log("amount_link____",amount,url)
   return (
     <View style={styles.container}>
       <Text style={[styles.text, { color: 'green' }]}>PAYMENT SUCCESSFUL</Text>

@@ -1,7 +1,6 @@
 // TopNavigation.js
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import HomeScreen from './Home/HomeScreen';
 import { View, Text } from 'react-native';
 import BankTransfer from './BankTransfer';
 

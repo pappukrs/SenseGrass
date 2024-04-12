@@ -40,6 +40,8 @@ const BankTransfer = () => {
     }
   };
 
+  // https://sense-grass-opal.vercel.app/save-money-transfer-details
+
   const saveBankTransferData = async () => {
     try {
       // Make API request to save data
@@ -73,7 +75,7 @@ const BankTransfer = () => {
       // Check if data saved successfully
       if (response.ok) {
         // Data saved successfully, navigate to the card details page
-        navigation.navigate('stripeCardForm');
+        navigation.navigate('stripeCardFormScreen');
       } else {
         // Error saving data, display error message
         setErrorMessage(data.error);

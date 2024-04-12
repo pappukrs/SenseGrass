@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-elements';
-import BankIcon from 'react-native-vector-icons/FontAwesome';
-import ScanQrIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import UpiIcon from 'react-native-vector-icons/FontAwesome6';
-import ViewIcon from 'react-native-vector-icons/Fontisto';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation hook
+import { useDispatch } from 'react-redux';
+import { setSelectedButton } from '.././Redux/Actions/ButtonAction';
 
-const ComponentWithButtons = () => {
+
+
+const TopButtons = () => {
 
   const navigation = useNavigation(); // Get navigation object using useNavigation hook
-
+  const dispatch = useDispatch();
 
   const [isPressedBank, setIsPressedBank] = useState(false);
   const [isPressedQrScanner, setIsPressedQrScanner] = useState(false);
@@ -24,58 +24,70 @@ const ComponentWithButtons = () => {
     else if (type === 'view') setIsPressedView(process === 'in');
   };
 
-  const handleBankTransfer = () => {
-    navigation.navigate('BankTransfer'); // Navigate to BankTransferComponent
+  const handleAccount = () => {
 
+    dispatch(setSelectedButton(0));
+    //navigation.navigate('Account'); // Navigate to BankTransferComponent
   };
 
-  const handleScanQRCode = () => {};
+  const handleDebitCard = () => {
+    dispatch(setSelectedButton(1))
+    //navigation.navigate('DebitCard'); // Navigate to BankTransferComponent
+  };
 
-  const handleUpiTransfer = () => {};
+  const handleLoans = () => {
+    dispatch(setSelectedButton(2))
+    //navigation.navigate('Loans');
+  };
 
-  const handleViewExpenses = () => {};
+  const handleInsurances = () => {
+    dispatch(setSelectedButton(3))
+    //navigation.navigate('InSurances');
+  };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={[styles.BankContainer, isPressedBank && styles.Bankpressed]}
-        onPress={handleBankTransfer}
+        onPress={handleAccount}
         onPressIn={() => handlePressed('bank', 'in')}
         onPressOut={() => handlePressed('bank', 'out')}
       >
-        <BankIcon name="bank" size={20} />
-        <Text style={styles.text}>Bank Transfer</Text>
+        
+        <Text style={styles.text}>Account</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={[styles.QrScannerContainer, isPressedQrScanner && styles.QrScannerpressed]}
-        onPress={handleScanQRCode}
+        onPress={handleDebitCard}
         onPressIn={() => handlePressed('qr', 'in')}
         onPressOut={() => handlePressed('qr', 'out')}
       >
-        <ScanQrIcon name="qrcode-scan" size={20} />
-        <Text style={styles.text}>Scan-QR</Text>
+        
+        <Text style={styles.text}>DebitCard</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={[styles.UPIContainer, isPressedUPI && styles.UPIpressed]}
-        onPress={handleUpiTransfer}
+        onPress={handleLoans}
         onPressIn={() => handlePressed('upi', 'in')}
         onPressOut={() => handlePressed('upi', 'out')}
       >
-        <UpiIcon name="at" size={20} />
-        <Text style={styles.text}>UPI</Text>
+        
+        <Text style={styles.text}>Loans</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={[styles.ViewContainer, isPressedView && styles.Viewpressed]}
-        onPress={handleViewExpenses}
+        onPress={handleInsurances}
         onPressIn={() => handlePressed('view', 'in')}
         onPressOut={() => handlePressed('view', 'out')}
       >
-        <ViewIcon name="preview" size={20} />
-        <Text style={styles.text}>View Expense</Text>
+  
+        <Text style={styles.text}>Insurance</Text>
       </TouchableOpacity>
+
+      
     </View>
   );
 };
@@ -135,4 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ComponentWithButtons;
+export default TopButtons;

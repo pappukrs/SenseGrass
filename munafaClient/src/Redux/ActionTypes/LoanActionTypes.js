@@ -1,0 +1,5 @@
+// ActionTypes/LoanActionTypes.js
+export const FETCH_LOANS_SUCCESS = 'FETCH_LOANS_SUCCESS';
+export const FETCH_LOANS_FAILURE = 'FETCH_LOANS_FAILURE';
+export const PAY_LOAN_SUCCESS = 'PAY_LOAN_SUCCESS';
+export const PAY_LOAN_FAILURE = 'PAY_LOAN_FAILURE';

@@ -1,0 +1,2 @@
+
+export const SET_SELECTED_BUTTON = 'SET_SELECTED_BUTTON';

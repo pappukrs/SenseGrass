@@ -2,11 +2,17 @@ import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Header = () => {
+const Header = ({navigation}) => {
+
+
+  const handleMenu = ()=>{
+    console.log("navigation",navigation)
+    navigation.navigate('AboutUs');
+  }
   return (
     <View style={styles.container}>
-      <TouchableOpacity >
-        <Ionicons name="menu" size={30} color="black" style={styles.icon} />
+      <TouchableOpacity  onPress={handleMenu}>
+        <Ionicons name="menu" size={30} color="black" style={styles.icon}  />
       </TouchableOpacity>
 
       <View style={styles.rightIcons}>

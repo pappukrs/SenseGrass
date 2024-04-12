@@ -3,10 +3,15 @@ import {View, Button, Platform} from 'react-native';
 import {CardField, useConfirmPayment} from '@stripe/stripe-react-native';
 import { useNavigation } from '@react-navigation/native';
 
-function StripePaymentForm() {
-    const navigation = useNavigation()
+function StripePaymentForm({ route, navigation }) {
+
+  var amount = route.params ? route.params.amount : undefined;
+  var url = route.params ? route.params.url : undefined;
+
+    const navigator = useNavigation()
   const fetchPaymentIntentClientSecret = async () => {
     console.log("fetchPaymentIntentClientSecret ")
+    // const apiEndpoint ="https://sense-grass-opal.vercel.app/"
     const apiEndpoint ="http://192.168.29.190:3000"
       //Platform.OS === 'android' ? 'http://192.168.29.190:3000' : 'http://10.0.2.2:4567';
 
@@ -56,10 +61,10 @@ function StripePaymentForm() {
 
     if (error) {
       console.log('Payment confirmation error', error);
-      navigation.navigate('paymentFailed')
+      navigator.navigate('paymentFailedScreen')
     } else if (paymentIntent) {
       console.log('Success from promise', paymentIntent);
-      navigation.navigate('paymentSuccess')
+      navigator.navigate('paymentSuccessScreen',{amount ,url})
     }
   };
 

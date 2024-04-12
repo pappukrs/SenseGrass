@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Image, Text } from 'react-native';
 import BackButton from '../BackButton'; 
 
-const CreditCardScreen = ({ navigation }) => {
+const DebitCardScreen = ({ navigation }) => {
   const [cardHolderName, setCardHolderName] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
@@ -13,7 +13,7 @@ const CreditCardScreen = ({ navigation }) => {
     if (!cardHolderName || !cardNumber || !expiryDate || !cvv) {
       setErrorMessage('Please fill in all fields.');
     } else {
-     
+      // Logic to save debit card details
       setErrorMessage('');
     }
   };
@@ -23,17 +23,17 @@ const CreditCardScreen = ({ navigation }) => {
   };
 
   const formatCardNumber = (input) => {
-    
+    // Remove non-numeric characters from input
     let formattedInput = input.replace(/\D/g, '');
-   
+    // Insert hyphens after every 4 digits
     formattedInput = formattedInput.replace(/(.{4})/g, '$1-');
-   
+    // Remove any trailing hyphens
     formattedInput = formattedInput.replace(/-+$/, '');
     return formattedInput;
   };
 
   const handleExpiryDateChange = (text) => {
-    
+    // Format the input to MM/YY
     const formattedInput = text.replace(/\D/g, '').slice(0, 4);
     let expiry = '';
     if (formattedInput.length >= 2) {
@@ -44,11 +44,10 @@ const CreditCardScreen = ({ navigation }) => {
     }
     setExpiryDate(expiry);
   };
-
   return (
     <View style={styles.container}>
        <Image
-        source={require('../../assets/creditcard.jpg')} 
+        source={require('../../../assets/creditcard.jpg')} // Replace with the path to your card image
         style={styles.cardImage}
       />
       <View style={styles.card}>
@@ -61,21 +60,21 @@ const CreditCardScreen = ({ navigation }) => {
         />
         <TextInput
           style={styles.input}
-          placeholder="Card Number"
+          placeholder="16 Digit Card Number"
           value={formatCardNumber(cardNumber)}
           onChangeText={(input) => setCardNumber(formatCardNumber(input))}
           keyboardType="numeric"
           maxLength={19} // 16 digits + 3 hyphens
         />
         <View style={styles.expiryCvvContainer}>
-          <TextInput
-            style={[styles.input, styles.expiryInput]}
-            placeholder="Expiry Date (MM/YY)"
-            value={expiryDate}
-            onChangeText={handleExpiryDateChange}
-            keyboardType="numeric"
-            maxLength={5} // MM/YY format
-          />
+        <TextInput
+  style={[styles.input, styles.expiryInput]}
+  placeholder="Expiry Date (MM/YY)"
+  value={expiryDate} // Use expiryDate state variable
+  onChangeText={handleExpiryDateChange} // Use handleExpiryDateChange function
+  keyboardType="numeric"
+  maxLength={5} // MM/YY format
+/>
           <TextInput
             style={[styles.input, styles.cvvInput]}
             placeholder="CVV"
@@ -139,4 +138,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreditCardScreen;
+export default DebitCardScreen;
