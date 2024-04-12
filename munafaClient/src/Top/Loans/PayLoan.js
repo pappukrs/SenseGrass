@@ -24,7 +24,7 @@ const PayLoan = ({ route, navigation }) => {
     //dispatch(payLoan(loanId, amount));
     // Navigate to success page upon successful payment
     //loanPay(amount, loanId)
-    navigation.navigate('stripeCardFormScreen',{amount,url:`http://192.168.29.190:3000/loan/${loanId}`});
+    navigation.navigate('stripeCardFormScreen',{amount,url:`https://sense-grass-u3m4.vercel.app/${loanId}`});
   };
 
   const loanPay = async (amount, loanId) => {

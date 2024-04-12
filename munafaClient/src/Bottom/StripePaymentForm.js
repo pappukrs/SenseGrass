@@ -12,7 +12,7 @@ function StripePaymentForm({ route, navigation }) {
   const fetchPaymentIntentClientSecret = async () => {
     console.log("fetchPaymentIntentClientSecret ")
     // const apiEndpoint ="https://sense-grass-opal.vercel.app/"
-    const apiEndpoint ="http://192.168.29.190:3000"
+    const apiEndpoint ="https://sense-grass-u3m4.vercel.app"
       //Platform.OS === 'android' ? 'http://192.168.29.190:3000' : 'http://10.0.2.2:4567';
 
     const response = await fetch(`${apiEndpoint}/create-payment-intent`, {

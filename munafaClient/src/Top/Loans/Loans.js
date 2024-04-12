@@ -13,7 +13,7 @@ const Loans = ({ navigation }) => {
 
   const getLoanData = async () => {
     try {
-      const response = await fetch('http://192.168.29.190:3000/loan/list');
+      const response = await fetch('https://sense-grass-u3m4.vercel.app/loan/list');
       if (!response.ok) {
         throw new Error('Failed to fetch loan data');
       }

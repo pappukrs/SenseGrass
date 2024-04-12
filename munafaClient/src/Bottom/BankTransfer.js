@@ -45,7 +45,7 @@ const BankTransfer = () => {
   const saveBankTransferData = async () => {
     try {
       // Make API request to save data
-      const response = await fetch('http://192.168.29.190:3000/save-money-transfer-details', {
+      const response = await fetch('https://sense-grass-u3m4.vercel.app/save-money-transfer-details', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
